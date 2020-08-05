@@ -6,7 +6,7 @@ MAX_HRS_IN_MONTH=100;
 EMP_RATE_PER_HR=20;
 NUM_WORKING_DAYS=20;
 
-totalEmpHr=0;
+totalEmpHrs=0;
 totalWorkingDays=0;
 function getWorkingHrs() {
    case $1 in
@@ -21,10 +21,16 @@ function getWorkingHrs() {
          ;;
    esac
 }
+function getEmpWage (){
+   echo $(($1*$EMP_RATE_PER_HR))
+}
 
-while [[ $totalWorkingHrs -lt $MAX_HRS_IN_MONTH && $totalWorkingDays -lt $NUM_WORKING_DAYS ]]
+while [[ $totalEmpHrs -lt $MAX_HRS_IN_MONTH && $totalWorkingDays -lt $NUM_WORKING_DAYS ]]
 do
    ((totalWorkingDays++))
    getWorkingHrs $((RANDOM%3))
-   totalWorkingHrs=$(($totalWorkingHrs+$workHrs))
+   totalEmpHrs=$(( $workHrs + $totalEmpHrs ))
+   dailyWages[$totalWorkingDays]=$(( $workHrs * $EMP_RATE_PER_HR ))
 done
+totalsalary="$( getEmpWage $totalEmpHrs )"
+
