@@ -1,5 +1,13 @@
-#!/bin/bash -x
+#!/bin/bash 
 echo "welcome to employee wage calculation problem"
+isPresent=1;
+randomCheck=$((RANDOM%2));
+if [ $isPresent -eq $randomCheck ]
+then
+   echo "Employee is present"
+else
+   echo "Employee is absent"
+fi
 IS_PART_TIME=1;
 IS_FULL_TIME=2;
 MAX_HRS_IN_MONTH=100;
